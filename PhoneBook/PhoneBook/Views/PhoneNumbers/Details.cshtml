@@ -1,0 +1,41 @@
+﻿@model PhoneBook.Models.PhoneNumber
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Phone Number</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Contact.FullName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Contact.FullName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Number)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Number)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PhoneType.Type)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PhoneType.Type)
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.PhoneNumberID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

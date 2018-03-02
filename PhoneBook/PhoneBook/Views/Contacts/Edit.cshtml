@@ -1,0 +1,120 @@
+﻿@model PhoneBook.Models.Contact
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Contact</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.ContactID)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.PhoneNumbers)
+            </dt>
+            <dd>
+                <table class="table">
+                    <tr>
+                        <th>
+                            Phone Number
+                        </th>
+                        <th>
+                            Phone Type
+                        </th>
+                        <th>
+                            Default
+                        </th>
+                        <th>
+                        </th>
+                    </tr>
+                    @foreach (var item in Model.PhoneNumbers)
+                {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Number)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.PhoneType.Type)
+                            </td>
+                            <td>
+                                @if (item.Default)
+                                {
+                                    <input type="checkbox" checked="checked"/>
+                                }
+
+                                else
+                                {
+                                    <input type="checkbox" />
+                                }
+                                
+                            </td>
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", "PhoneNumbers", new { id = item.PhoneNumberID }, null) |
+                                @Html.ActionLink("Delete", "Delete", "PhoneNumbers", new { id = item.PhoneNumberID }, null)
+                            </td>
+                        </tr>
+                    }
+
+                </table>
+                <tr>
+                    @Html.ActionLink("Add new phone number", "Create", "PhoneNumbers", new { id = Model.ContactID }, null)
+                </tr>
+            </dd>
+        </dl>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
